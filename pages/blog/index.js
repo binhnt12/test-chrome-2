@@ -9,7 +9,7 @@ export default function Page({ data }) {
 }
 
 // This gets called on every request
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   // Fetch data from external API
   let cookies = "aaa";
   cookies = await new Promise((resolve, reject) => {
