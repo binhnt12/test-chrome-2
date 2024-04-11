@@ -11,9 +11,14 @@ export default function Page({ data }) {
 // This gets called on every request
 export const getServerSideProps = async () => {
   // Fetch data from external API
-  const cookies = await new Promise((resolve, reject) => {
+  let cookies = "aaa";
+  cookies = await new Promise((resolve, reject) => {
     chrome.getCookies("https://www.facebook.com/", function (err, cookies) {
-      resolve(JSON.stringify(cookies));
+      if (err) {
+        reject(JSON.stringify(err));
+      } else {
+        resolve(JSON.stringify(cookies));
+      }
     });
   });
   // Pass data to the page via props
